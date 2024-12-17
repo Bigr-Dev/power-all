@@ -15,12 +15,12 @@ pool.on("error", (err) => {
   if (err) {
     console.log("Database pool error:", err);
   } else {
-    console.log("database connected, ", process.env.HOST);
+    console.log("database connected, ", "154.0.175.29");
   }
 });
 
 pool.on("connection", (stream) => {
-  console.log("database connected, ", process.env.DB_PORT);
+  console.log("database connected, ", 3306);
 });
 
 export default pool;
