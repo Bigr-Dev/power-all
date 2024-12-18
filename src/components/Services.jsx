@@ -1,16 +1,17 @@
+// next
+import Image from "next/image";
+import Link from "next/link";
+
+// images
 import solar from "@/assets/solar.jpg";
 import generators from "@/assets/heavy_duty2.jpg";
 import base from "@/assets/fuel_cooling.jpg";
 
-import Image from "next/image";
-import Link from "next/link";
-
 const Services = async () => {
-  const origin = process.env.ORIGIN || "power-all.vercel.app";
-  const url = `${origin}/api`;
-  const res = await fetch(url);
+  const origin = process.env.API_ORIGIN;
+  const res = await fetch(origin);
   const services = await res.json();
-  console.log("origin", origin);
+
   return (
     <section className={"py-20  bg-white "}>
       <div className="container mx-auto px-4">

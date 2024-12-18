@@ -1,5 +1,4 @@
 const ProductCard = ({ product, onClick }) => {
-  //   console.log("product", product);
   return (
     <div
       className="bg-gray-50 rounded-lg shadow-lg overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"

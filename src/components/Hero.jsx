@@ -1,6 +1,9 @@
-import hero_bg3 from "@/assets/night.jpg";
+// next
 import Image from "next/image";
 import Link from "next/link";
+
+// images
+import hero_bg3 from "@/assets/night.jpg";
 
 const Hero = () => {
   return (

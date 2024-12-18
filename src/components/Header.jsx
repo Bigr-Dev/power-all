@@ -1,7 +1,10 @@
 "use client";
-import { Power, Handshake, Home } from "lucide-react";
+// next
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+// icons
+import { Power, Handshake, Home } from "lucide-react";
 
 const Header = () => {
   const pathname = usePathname();

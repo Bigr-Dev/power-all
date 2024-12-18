@@ -1,5 +1,9 @@
+// next
 import Image from "next/image";
+
+// images
 import placeholder from "@/assets/small_business2.jpg";
+
 const ProductCard = ({ product, onClick }) => {
   //   console.log("product", product);
   return (

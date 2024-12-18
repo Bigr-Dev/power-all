@@ -1,77 +1,31 @@
-import {
-  GET_PRODUCT_BY_BRAND,
-  GET_PRODUCTS_BY_BRAND_AND_CATEGORY,
-  GET_PRODUCTS_BY_CATEGORY_ID,
-  GET_PRODUCTS_BY_SERVICE_CATEGORY,
-  GET_SERVICES,
-} from "@/lib/client.queries";
-import React from "react";
-
+// components
 import ProductSection from "@/components/ProductSection";
 
 const page = async ({ params }) => {
   const { products_by, service_id } = await params;
-  const origin = process.env.ORIGIN || "power-all.vercel.app";
-  const url = `${origin}/api`;
-  const res = await fetch(url);
-  const services = await res.json();
 
-  // const [services] = await GET_SERVICES();
-  let products = [];
+  const origin = process.env.API_ASIDE;
+  let url = origin;
 
   if (products_by[3]) {
     const brand_id = products_by[1];
     const category_id = products_by[3];
-    const [result] = await GET_PRODUCTS_BY_BRAND_AND_CATEGORY(
-      brand_id,
-      category_id
-    );
-    products = result;
+    url = `${origin}${service_id}/search/brand/${brand_id}/category/${category_id}`;
   } else if (products_by[0] === "brand") {
-    const [result] = await GET_PRODUCT_BY_BRAND(products_by[1]);
-    products = result;
+    const brand_id = products_by[1];
+    url = `${origin}${service_id}/search/brand/${brand_id}`;
   } else if (products_by[0] === "category") {
     const category_id = products_by[1];
     if (service_id !== "all") {
-      const [result] = await GET_PRODUCTS_BY_SERVICE_CATEGORY(
-        service_id,
-        category_id
-      );
-      products = result;
+      url = `${origin}${service_id}/search/category/${category_id}`;
     } else {
-      const [result] = await GET_PRODUCTS_BY_CATEGORY_ID(category_id);
-
-      products = result;
+      url = `${origin}${service_id}/search/category/${category_id}`;
     }
   }
 
-  // if (products_by[3]) {
-  //   const brand_id = products_by[1];
-  //   const category_id = products_by[3];
-  //   const [result] = await GET_PRODUCTS_BY_BRAND_AND_CATEGORY(
-  //     brand_id,
-  //     category_id
-  //   );
-  //   products = result;
-  // } else if (products_by[0] === "brand") {
-  //   const [result] = await GET_PRODUCT_BY_BRAND(products_by[1]);
-  //   products = result;
-  // } else if (products_by[0] === "category") {
-  //   const category_id = products_by[1];
-  //   if (service_id !== "all") {
-  //     const [result] = await GET_PRODUCTS_BY_SERVICE_CATEGORY(
-  //       service_id,
-  //       category_id
-  //     );
-  //     products = result;
-  //   } else {
-  //     const [result] = await GET_PRODUCTS_BY_CATEGORY_ID(category_id);
+  const res = await fetch(url);
+  const { services, products } = await res.json();
 
-  //     products = result;
-  //   }
-  // }
-
-  // console.log("/search/", products);
   return (
     <div className=" md:col-span-3 h-full overflow-y-auto  p-4">
       <h1 className="text-3xl font-bold text-center ">

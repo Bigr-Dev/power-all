@@ -1,17 +1,11 @@
-import {
-  GET_PRODUCTS,
-  GET_PRODUCTS_BY_SERVICE_ID,
-  GET_SERVICES,
-} from "@/lib/client.queries";
-import React from "react";
-
+// components
 import ProductSection from "@/components/ProductSection";
 
 const page = async ({ params }) => {
   const { service_id } = await params;
 
-  const origin = process.env.ORIGIN || "power-all.vercel.app";
-  const url = `${origin}/api/services/${service_id}`;
+  const origin = process.env.API_ASIDE;
+  const url = `${origin}${service_id}`;
 
   const res = await fetch(url);
 

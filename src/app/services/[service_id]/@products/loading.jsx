@@ -1,3 +1,4 @@
+// components
 import SkeletonCard from "@/components/SkeletonCard";
 
 const loading = () => {

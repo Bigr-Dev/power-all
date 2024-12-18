@@ -1,15 +1,19 @@
 "use client";
-import placeholder from "@/assets/small_business2.jpg";
-
+// react
 import { useState } from "react";
-import Modal from "./Modal";
-import ProductCard from "./ProductCard";
+
+// next
 import Image from "next/image";
 
+// images
+import placeholder from "@/assets/small_business2.jpg";
+
+//components
+import Modal from "./Modal";
+import ProductCard from "./ProductCard";
+
 const ProductSection = ({ products }) => {
-  // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
-  // State for modal
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const productsPerPage = 9;

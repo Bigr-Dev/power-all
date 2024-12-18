@@ -1,3 +1,4 @@
+// components
 import ContactSection from "@/components/ContactSection";
 import Fabrication from "@/components/Fabrication";
 import Hero from "@/components/Hero";

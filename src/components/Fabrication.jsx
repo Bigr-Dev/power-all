@@ -1,6 +1,11 @@
-import { Factory, Wrench, CheckCircle } from "lucide-react";
-import hero_bg3 from "@/assets/hero_bg3.png";
+// next
 import Image from "next/image";
+
+// images
+import hero_bg3 from "@/assets/hero_bg3.png";
+
+// icons
+import { Factory, Wrench, CheckCircle } from "lucide-react";
 
 const Fabrication = () => {
   return (
