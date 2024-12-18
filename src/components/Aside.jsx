@@ -1,58 +1,30 @@
 "use client";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
 
-const Aside = ({ service_id, context }) => {
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+const Aside = ({ brands, categories, service_id }) => {
   const router = useRouter();
-  const [brands, setBrands] = useState(context.brands_all);
-  const [categories, setCategories] = useState(context.categories_all);
+
   const [selectedBrand, setSelectedBrand] = useState("All");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    if (service_id === "all") {
-      setBrands(context.brands_all);
-      setCategories(context.categories_all);
-    } else if (service_id == "1") {
-      setBrands(context.brands_1);
-      setCategories(context.categories_1);
-    } else if (service_id == "2") {
-      setBrands(context.brands_2);
-      setCategories(context.categories_2);
-    } else if (service_id == "3") {
-      setBrands(context.brands_3);
-      setCategories(context.categories_3);
-    }
-  }, [service_id]);
-
-  const selectBrand = (e) => {
-    e.preventDefault();
-    const brand_id = e.target.value;
-    setSelectedCategory("All");
-    setSelectedBrand(brand_id);
-  };
-
-  const href = () => {
-    let href = `/services/${service_id}`;
     if (selectedBrand !== "All" && selectedCategory !== "All") {
-      href = `/services/${service_id}/search/brand/${selectedBrand}/category/${selectedCategory}`;
+      router.push(
+        `/services/${service_id}/search/brand/${selectedBrand}/category/${selectedCategory}`
+      );
     } else if (selectedBrand !== "All" && selectedCategory === "All") {
-      href = `/services/${service_id}/search/brand/${selectedBrand}`;
+      router.push(`/services/${service_id}/search/brand/${selectedBrand}`);
     } else if (selectedBrand === "All" && selectedCategory !== "All") {
-      href = `/services/${service_id}/search/category/${selectedCategory}`;
-    }
-    return href;
-  };
-
-  useEffect(() => {
-    if (selectedBrand === "All" && selectedCategory === "All") {
-      router.push(`/services/${service_id}`);
+      router.push(
+        `/services/${service_id}/search/category/${selectedCategory}`
+      );
     } else if (selectedBrand === "All") {
       router.push(`/services/${service_id}`);
     }
-  }, [selectedBrand, selectedCategory]);
+  }, [selectedBrand, selectedCategory, router]);
 
   return (
     <div>
@@ -89,15 +61,22 @@ const Aside = ({ service_id, context }) => {
               <select
                 className="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 value={selectedBrand}
-                onChange={(e) => selectBrand(e)}
+                onChange={(e) => setSelectedBrand(e.target.value)}
               >
-                <option value="All">All</option>
+                <option id="all" value="All">
+                  All
+                </option>
                 {brands.map((brand, index) => (
-                  <option key={index} value={brand.brand_id}>
+                  <option
+                    key={index}
+                    id={brand.brand_id}
+                    value={brand.brand_id}
+                  >
                     {brand.brand_name}
                   </option>
                 ))}
               </select>
+
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
                   className="fill-current h-4 w-4"
@@ -110,6 +89,7 @@ const Aside = ({ service_id, context }) => {
             </div>
           </div>
         )}
+
         {categories[0] && (
           <div className="w-full">
             <label
@@ -124,7 +104,7 @@ const Aside = ({ service_id, context }) => {
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 value={selectedCategory}
               >
-                <option value="All">All</option>
+                {brands[1] && <option value="All">All</option>}
                 {categories.map((category, index) => (
                   <option key={index} value={category.category_id}>
                     {category.category}
@@ -144,7 +124,7 @@ const Aside = ({ service_id, context }) => {
           </div>
         )}
 
-        {selectedBrand !== "All" || selectedCategory !== "All" ? (
+        {/* {selectedBrand !== "All" || selectedCategory !== "All" ? (
           <Link
             href={href()}
             className={`${
@@ -165,7 +145,7 @@ const Aside = ({ service_id, context }) => {
           >
             Search
           </button>
-        )}
+        )} */}
       </div>
     </div>
   );

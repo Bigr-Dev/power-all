@@ -2,16 +2,14 @@ import solar from "@/assets/solar.jpg";
 import generators from "@/assets/heavy_duty2.jpg";
 import base from "@/assets/fuel_cooling.jpg";
 
-import { GET_SERVICES } from "@/lib/client.queries";
 import Image from "next/image";
 import Link from "next/link";
 
-const Services = async ({ params }) => {
-  const [services] = await GET_SERVICES();
-
-  const href = (service_id) => {
-    return `/services/${service_id}`;
-  };
+const Services = async () => {
+  const origin = process.env.__NEXT_PRIVATE_ORIGIN;
+  const url = `${origin}/api`;
+  const res = await fetch(url);
+  const services = await res.json();
 
   return (
     <section className={"py-20  bg-white "}>
@@ -21,7 +19,7 @@ const Services = async ({ params }) => {
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((item) => (
-            <Link href={href(item.id)} key={item.id}>
+            <Link href={`/services/${item.id}`} key={item.id}>
               <div className=" bg-gray-50 rounded-lg shadow-lg overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105">
                 <Image
                   src={
