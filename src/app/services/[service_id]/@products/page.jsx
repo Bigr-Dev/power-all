@@ -10,7 +10,7 @@ import ProductSection from "@/components/ProductSection";
 const page = async ({ params }) => {
   const { service_id } = await params;
 
-  const origin = process.env.__NEXT_PRIVATE_ORIGIN;
+  const origin = process.env.ORIGIN;
   const url = `${origin}/api/services/${service_id}`;
 
   const res = await fetch(url);

@@ -6,11 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Services = async () => {
-  const origin = process.env.__NEXT_PRIVATE_ORIGIN;
+  const origin = process.env.ORIGIN;
   const url = `${origin}/api`;
   const res = await fetch(url);
   const services = await res.json();
-
+  console.log("origin", origin);
   return (
     <section className={"py-20  bg-white "}>
       <div className="container mx-auto px-4">
