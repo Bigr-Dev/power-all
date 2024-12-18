@@ -6,9 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Services = async () => {
-  const origin =
-    process.env.ORIGIN ||
-    "https://power-all-rendanis-projects-7b9f566c.vercel.app/";
+  const origin = process.env.ORIGIN || "power-all.vercel.app";
   const url = `${origin}/api`;
   const res = await fetch(url);
   const services = await res.json();
