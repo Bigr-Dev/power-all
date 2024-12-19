@@ -24,6 +24,10 @@ export async function generateStaticParams() {
   ];
 }
 
+export const metadata = {
+  title: "products",
+};
+
 const page = async ({ params }) => {
   const { service_id } = await params;
 

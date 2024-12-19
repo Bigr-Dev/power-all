@@ -150,6 +150,10 @@ export async function generateStaticParams() {
   return params;
 }
 
+export const metadata = {
+  title: "filtered products",
+};
+
 async function getProductData(service_id, products_by) {
   const origin = process.env.API_ASIDE;
   let url = origin;
@@ -171,7 +175,7 @@ async function getProductData(service_id, products_by) {
 }
 
 export default async function Page({ params }) {
-  const { products_by, service_id } = params;
+  const { products_by, service_id } = await params;
   const { services, products } = await getProductData(service_id, products_by);
 
   return (
