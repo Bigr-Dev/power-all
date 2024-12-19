@@ -1,6 +1,29 @@
 // components
 import ProductSection from "@/components/ProductSection";
 
+// export async function generateStaticParams() {
+//   const origin = process.env.API_SERVICES;
+//   const res = await fetch(origin);
+//   const services = await res.json();
+
+//   return services.map((service) => ({
+//     service_id: service.id.toString(),
+//   }));
+// }
+
+export async function generateStaticParams() {
+  const origin = process.env.API_ASIDE;
+  const res = await fetch(`${origin}all`);
+  const { services } = await res.json();
+
+  return [
+    { service_id: "all" },
+    ...services.map((service) => ({
+      service_id: service.id.toString(),
+    })),
+  ];
+}
+
 const page = async ({ params }) => {
   const { service_id } = await params;
 
